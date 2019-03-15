@@ -1,14 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28705.295
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cave.Avatar", "Cave.Avatar\Cave.Avatar.csproj", "{0CCD73FB-2E60-4308-AA60-A1109F9FCCFC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{44FFCDD1-E64D-4ED9-82F0-594C50200CAB}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		cave-avatar.sln.ver = cave-avatar.sln.ver
 		LICENSE = LICENSE
 		Rebracer.xml = Rebracer.xml
 	EndProjectSection

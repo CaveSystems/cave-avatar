@@ -1,7 +1,7 @@
 namespace Cave.Media.Video
 {
     /// <summary>
-    /// Provides available (implemented) avatar types
+    /// Provides available (implemented) avatar types.
     /// </summary>
     public enum AvatarType
     {

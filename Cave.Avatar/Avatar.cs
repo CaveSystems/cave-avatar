@@ -22,46 +22,70 @@ using SkiaSharp;
 
 namespace Cave.Media.Video
 {
-    /// <summary>Provides a class for generating avatars using gravatar</summary>
+    /// <summary>Provides a class for generating avatars using gravatar.</summary>
     public class Avatar
     {
-        string m_Name;
-        AvatarType m_Type;
-        int m_Size;
+        string name;
+        AvatarType type;
+        int size;
 
         /// <summary>
-        /// Creates a new avatar
+        /// Initializes a new instance of the <see cref="Avatar"/> class.
         /// </summary>
-        /// <param name="name">Name of the user</param>
-        /// <param name="type">Type</param>
-        /// <param name="size">Size in pixel</param>
+        /// <param name="name">Name of the user.</param>
+        /// <param name="type">Type.</param>
+        /// <param name="size">Size in pixel.</param>
         public Avatar(string name, AvatarType type, int size)
         {
-            m_Name = name;
-            m_Type = type;
-            m_Size = size;
+            this.name = name;
+            this.type = type;
+            this.size = size;
         }
 
         /// <summary>
-        /// Gets / sets the name of the avatar
+        /// Gets / sets the name of the avatar.
         /// </summary>
-        public string Name { get => m_Name; set { m_Name = value; Invalidate(); } }
+        public string Name
+        {
+            get => name;
+            set
+            {
+                name = value;
+                Invalidate();
+            }
+        }
 
         /// <summary>
-        /// Gets / sets the type of the avatar
+        /// Gets / sets the type of the avatar.
         /// </summary>
-        public AvatarType Type { get => m_Type; set { m_Type = value; Invalidate(); } }
+        public AvatarType Type
+        {
+            get => type;
+            set
+            {
+                type = value;
+                Invalidate();
+            }
+        }
 
         /// <summary>
-        /// Gets / sets the size of the avatar
+        /// Gets / sets the size of the avatar.
         /// </summary>
-        public int Size { get => m_Size; set { m_Size = value; Invalidate(); } }
+        public int Size
+        {
+            get => size;
+            set
+            {
+                size = value;
+                Invalidate();
+            }
+        }
 
         /// <summary>Invalidates this instance.</summary>
         public void Invalidate()
         {
 #if NET20 || NET35 || NET40 || NET45 || NET46 || NET471
-            m_Bitmap = null;
+            bitmap = null;
 #elif NETSTANDARD20
 #else
 #error No code defined for the current framework or NETXX version define missing!
@@ -76,12 +100,13 @@ namespace Cave.Media.Video
 
 #if NET20 || NET35 || NET40 || NET45 || NET46 || NET471
         #region static class
+
         /// <summary>
-        /// Gets the Gravatar with the specified properties
+        /// Gets the Gravatar with the specified properties.
         /// </summary>
-        /// <param name="text">Text to hash</param>
-        /// <param name="type">Avatar type</param>
-        /// <param name="rectSize">Size of the bitmap</param>
+        /// <param name="text">Text to hash.</param>
+        /// <param name="type">Avatar type.</param>
+        /// <param name="rectSize">Size of the bitmap.</param>
         /// <returns></returns>
         public static Bitmap GetGravatar(string text, AvatarType type, int rectSize)
         {
@@ -99,11 +124,11 @@ namespace Cave.Media.Video
         }
 
         /// <summary>
-        /// Retrieves an avatar using only the text on a shaded background
+        /// Retrieves an avatar using only the text on a shaded background.
         /// </summary>
-        /// <param name="text">The text / name of the avatar</param>
-        /// <param name="type">The avatar type</param>
-        /// <param name="rectSize">Size to use to create the avatar</param>
+        /// <param name="text">The text / name of the avatar.</param>
+        /// <param name="type">The avatar type.</param>
+        /// <param name="rectSize">Size to use to create the avatar.</param>
         /// <returns></returns>
         public static Bitmap GetText(string text, AvatarType type, int rectSize)
         {
@@ -127,19 +152,21 @@ namespace Cave.Media.Video
             {
                 g.SmoothingMode = SmoothingMode.AntiAlias;
                 g.PixelOffsetMode = PixelOffsetMode.HighQuality;
-                //background
+
+                // background
                 {
                     using (LinearGradientBrush brush = new System.Drawing.Drawing2D.LinearGradientBrush(rect, colors[0], colors[1], rot1))
                     {
                         g.FillRectangle(brush, rect);
                     }
                 }
-                //text
+
+                // text
                 {
                     StringFormat format = new System.Drawing.StringFormat(StringFormatFlags.NoClip)
                     {
                         LineAlignment = StringAlignment.Center,
-                        Alignment = StringAlignment.Center
+                        Alignment = StringAlignment.Center,
                     };
                     float fontSize = (float)(2.5 * rectSize / (text.Length * Math.Sqrt(text.Length)));
                     using (Font font = new Font(FontFamily.GenericSansSerif, fontSize, FontStyle.Bold, GraphicsUnit.Pixel))
@@ -159,12 +186,12 @@ namespace Cave.Media.Video
         }
 
         /// <summary>
-        /// Retrieves an avatar using only the first letter on a shaded background
+        /// Retrieves an avatar using only the first letter on a shaded background.
         /// </summary>
-        /// <param name="text">The text / name of the avatar</param>
-        /// <param name="type">The avatar type</param>
-        /// <param name="size">Size to use to create the avatar</param>
-        /// <param name="drawBackground">The background to use</param>
+        /// <param name="text">The text / name of the avatar.</param>
+        /// <param name="type">The avatar type.</param>
+        /// <param name="size">Size to use to create the avatar.</param>
+        /// <param name="drawBackground">The background to use.</param>
         /// <returns></returns>
         public static Bitmap GetFirstLetter(string text, AvatarType type, int size, bool drawBackground)
         {
@@ -188,7 +215,8 @@ namespace Cave.Media.Video
             {
                 g.SmoothingMode = SmoothingMode.AntiAlias;
                 g.PixelOffsetMode = PixelOffsetMode.HighQuality;
-                //background
+
+                // background
                 if (drawBackground)
                 {
                     using (LinearGradientBrush brush = new LinearGradientBrush(rect, colors[0], colors[1], rot1))
@@ -196,12 +224,13 @@ namespace Cave.Media.Video
                         g.FillRectangle(brush, rect);
                     }
                 }
-                //text
+
+                // text
                 {
                     StringFormat format = new StringFormat(StringFormatFlags.NoClip)
                     {
                         LineAlignment = StringAlignment.Center,
-                        Alignment = StringAlignment.Center
+                        Alignment = StringAlignment.Center,
                     };
                     using (Font font = new Font(FontFamily.GenericSansSerif, size * 3f / 4f, FontStyle.Bold, GraphicsUnit.Pixel))
                     {
@@ -222,11 +251,11 @@ namespace Cave.Media.Video
         }
 
         /// <summary>
-        /// Obtains an avatar for the specified string
+        /// Obtains an avatar for the specified string.
         /// </summary>
-        /// <param name="name">The name of the user to obtain an avatar for</param>
-        /// <param name="type">The type of avatar to use</param>
-        /// <param name="size">Size to use to create avatar</param>
+        /// <param name="name">The name of the user to obtain an avatar for.</param>
+        /// <param name="type">The type of avatar to use.</param>
+        /// <param name="size">Size to use to create avatar.</param>
         /// <returns></returns>
         public static Bitmap GetAvatar(string name, AvatarType type, int size)
         {
@@ -244,9 +273,9 @@ namespace Cave.Media.Video
         }
 
         /// <summary>
-        /// Obtains a random avatar
+        /// Obtains a random avatar.
         /// </summary>
-        /// <param name="size">Size to use to create avatar</param>
+        /// <param name="size">Size to use to create avatar.</param>
         /// <returns></returns>
         public static Bitmap GetRandomAvatar(int size)
         {
@@ -257,10 +286,10 @@ namespace Cave.Media.Video
         }
 
         /// <summary>
-        /// Obtains a random avatar for the specified string
+        /// Obtains a random avatar for the specified string.
         /// </summary>
-        /// <param name="name">The name of the user to obtain an avatar for</param>
-        /// <param name="size">Size to use to create avatar</param>
+        /// <param name="name">The name of the user to obtain an avatar for.</param>
+        /// <param name="size">Size to use to create avatar.</param>
         /// <returns></returns>
         public static Bitmap GetRandomAvatar(string name, int size)
         {
@@ -271,8 +300,8 @@ namespace Cave.Media.Video
         /// <summary>
         /// Obtains a random avatar cached avatar.
         /// </summary>
-        /// <param name="size">Size of the avatar</param>
-        /// <returns>Returns null if no avatars are cached locally</returns>
+        /// <param name="size">Size of the avatar.</param>
+        /// <returns>Returns null if no avatars are cached locally.</returns>
         public static Bitmap GetRandomCachedAvatar(int size)
         {
             AssemblyVersionInfo ver = AssemblyVersionInfo.Program;
@@ -294,11 +323,11 @@ namespace Cave.Media.Video
         }
 
         /// <summary>
-        /// Obtains an avatar and caches it under the localmachine (if writable, otherwise localuser) directory
+        /// Obtains an avatar and caches it under the localmachine (if writable, otherwise localuser) directory.
         /// </summary>
-        /// <param name="name">The name of the user to obtain an avatar for</param>
-        /// <param name="type">The type of avatar to use</param>
-        /// <param name="size">the size (32, 48, 64, 96, 128, 192, 256 are good values)</param>
+        /// <param name="name">The name of the user to obtain an avatar for.</param>
+        /// <param name="type">The type of avatar to use.</param>
+        /// <param name="size">the size (32, 48, 64, 96, 128, 192, 256 are good values).</param>
         /// <returns></returns>
         public static Bitmap GetCachedAvatar(string name, AvatarType type, int size)
         {
@@ -309,7 +338,8 @@ namespace Cave.Media.Video
             {
                 bool save = true;
                 string fileName = FileSystem.Combine(path, ver.Company, "Avatar", type.ToString(), size.ToString(), hash + ".png");
-                //get image from file
+
+                // get image from file
                 try
                 {
                     if (File.Exists(fileName))
@@ -318,17 +348,23 @@ namespace Cave.Media.Video
                         save = false;
                     }
                 }
-                catch { }
-                //get image from gravatar
+                catch
+                {
+                }
+
+                // get image from gravatar
                 if (img == null)
                 {
                     try
                     {
                         img = GetAvatar(name, type, size);
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
-                //save image
+
+                // save image
                 if (save)
                 {
                     try
@@ -336,9 +372,12 @@ namespace Cave.Media.Video
                         Directory.CreateDirectory(Path.GetDirectoryName(fileName));
                         img.Save(fileName, ImageFormat.Png);
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
-                //set image
+
+                // set image
                 if (img != null)
                 {
                     return img;
@@ -348,20 +387,20 @@ namespace Cave.Media.Video
         }
         #endregion
 
-        Bitmap m_Bitmap;
+        Bitmap bitmap;
 
         /// <summary>
-        /// Obtains the bitmap
+        /// Obtains the bitmap.
         /// </summary>
         public Bitmap Bitmap
         {
             get
             {
-                if (m_Bitmap == null)
+                if (bitmap == null)
                 {
-                    m_Bitmap = GetCachedAvatar(m_Name, m_Type, m_Size);
+                    bitmap = GetCachedAvatar(name, type, size);
                 }
-                return m_Bitmap;
+                return bitmap;
             }
         }
 #elif NETSTANDARD20
