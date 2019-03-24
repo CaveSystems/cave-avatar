@@ -109,7 +109,7 @@ namespace Cave.Web.Avatar
                         break;
                 }
                 target.Draw(bitmap, x, y, w, h, translation);
-                Trace.TraceInformation("DrawFace {0} {1} {2} {3} {4} {5}", index, x, y, w, h, translation);
+                Trace.TraceInformation("DrawFace {0} {1} {2} {3} {4} {5} Flip: {6}", index, x, y, w, h, color, translation.HasValue);
             }
         }
 
@@ -145,7 +145,7 @@ namespace Cave.Web.Avatar
                     break;
             }
             target.Draw(bitmap, x, y, w, h, translation);
-            Trace.TraceInformation("DrawEyes {0} {1} {2} {3} {4} {5}", index, x, y, w, h, translation);
+            Trace.TraceInformation("DrawEyes {0} {1} {2} {3} {4} Flip:{5}", index, x, y, w, h, translation.HasValue);
         }
 
         void DrawMouth(int index, IList<Item> bmp, Bitmap32 target)
@@ -179,7 +179,7 @@ namespace Cave.Web.Avatar
                     break;
             }
             target.Draw(bitmap, x, y, w, h, translation);
-            Trace.TraceInformation("DrawMouth {0} {1} {2} {3} {4} {5}", index, x, y, w, h, translation);
+            Trace.TraceInformation("DrawMouth {0} {1} {2} {3} {4} Flip: {5}", index, x, y, w, h, translation.HasValue);
         }
 
         void DrawNose(int index, IList<Item> bmp, Bitmap32 target)
@@ -214,7 +214,7 @@ namespace Cave.Web.Avatar
                     break;
             }
             target.Draw(bitmap, x, y, w, h, translation);
-            Trace.TraceInformation("DrawNose {0} {1} {2} {3} {4} {5}", index, x, y, w, h, translation);
+            Trace.TraceInformation("DrawNose {0} {1} {2} {3} {4} Flip: {5}", index, x, y, w, h, translation.HasValue);
         }
 
         void Draw(WebData data, int color, int nose, int eyes, int mouth, int face, int rotate)
@@ -331,7 +331,7 @@ namespace Cave.Web.Avatar
         /// <param name="mouth">The mouth (0..31).</param>
         /// <param name="face">The face (0..31).</param>
         /// <param name="rotate">The rotation (0..15).</param>
-        /// <remarks>Returns a raw png image of resolution 600x600.</remarks>
+        /// <remarks>Returns a page with the image of resolution 600x600.</remarks>
         [WebPage(Paths = "/avatar/test")]
         public void AvatarTest(WebData data, long? color = null, long? nose = null, long? eyes = null, long? mouth = null, long? face = null, long? rotate = null)
         {
@@ -373,32 +373,42 @@ namespace Cave.Web.Avatar
             html.Content.CardOpen(Bootstrap4.GetLink("Avatar ID " + id, "/Avatar?id=" + id));
             html.Content.Image("/avatar/get?id=" + id, "img-fluid");
             html.Content.ListGroupOpen();
-
             html.Content.ListGroupItemOpen();
-            html.Content.Text("Color: " + color);
+            html.Content.AddHtml(Bootstrap4.GetLink("<<", $"/avatar/test?color={color - 1}&nose={nose}&eyes={eyes}&mouth={mouth}&face={face}&rotate={rotate}"));
+            html.Content.Text($"Color: {color}");
+            html.Content.AddHtml(Bootstrap4.GetLink(">>", $"/avatar/test?color={color + 1}&nose={nose}&eyes={eyes}&mouth={mouth}&face={face}&rotate={rotate}"));
             html.Content.ListGroupItemClose();
             html.Content.ListGroupItemOpen();
+            html.Content.AddHtml(Bootstrap4.GetLink("<<", $"/avatar/test?color={color}&nose={nose - 1}&eyes={eyes}&mouth={mouth}&face={face}&rotate={rotate}"));
             html.Content.Text("Nose: " + nose);
+            html.Content.AddHtml(Bootstrap4.GetLink(">>", $"/avatar/test?color={color}&nose={nose + 1}&eyes={eyes}&mouth={mouth}&face={face}&rotate={rotate}"));
             html.Content.ListGroupItemClose();
             html.Content.ListGroupItemOpen();
+            html.Content.AddHtml(Bootstrap4.GetLink("<<", $"/avatar/test?color={color }&nose={nose}&eyes={eyes - 1}&mouth={mouth}&face={face}&rotate={rotate}"));
             html.Content.Text("Eyes: " + eyes);
+            html.Content.AddHtml(Bootstrap4.GetLink(">>", $"/avatar/test?color={color }&nose={nose}&eyes={eyes + 1}&mouth={mouth}&face={face}&rotate={rotate}"));
             html.Content.ListGroupItemClose();
             html.Content.ListGroupItemOpen();
+            html.Content.AddHtml(Bootstrap4.GetLink("<<", $"/avatar/test?color={color }&nose={nose}&eyes={eyes}&mouth={mouth - 1}&face={face}&rotate={rotate}"));
             html.Content.Text("Mouth: " + mouth);
+            html.Content.AddHtml(Bootstrap4.GetLink(">>", $"/avatar/test?color={color }&nose={nose}&eyes={eyes}&mouth={mouth + 1}&face={face}&rotate={rotate}"));
             html.Content.ListGroupItemClose();
             html.Content.ListGroupItemOpen();
+            html.Content.AddHtml(Bootstrap4.GetLink("<<", $"/avatar/test?color={color }&nose={nose}&eyes={eyes}&mouth={mouth}&face={face - 1}&rotate={rotate}"));
             html.Content.Text("Face: " + face);
+            html.Content.AddHtml(Bootstrap4.GetLink(">>", $"/avatar/test?color={color }&nose={nose}&eyes={eyes}&mouth={mouth}&face={face + 1}&rotate={rotate}"));
             html.Content.ListGroupItemClose();
             html.Content.ListGroupItemOpen();
+            html.Content.AddHtml(Bootstrap4.GetLink("<<", $"/avatar/test?color={color }&nose={nose}&eyes={eyes}&mouth={mouth}&face={face}&rotate={rotate - 1}"));
             html.Content.Text("Rotate: " + rotate);
+            html.Content.AddHtml(Bootstrap4.GetLink(">>", $"/avatar/test?color={color }&nose={nose}&eyes={eyes}&mouth={mouth}&face={face}&rotate={rotate + 1}"));
             html.Content.ListGroupItemClose();
-
             html.Content.ListGroupClose();
             html.Content.CardClose();
 
             WebMessage msg = WebMessage.Create(data.Method, "Created avatar.");
             data.Answer = html.ToAnswer(msg);
-            data.Answer.SetCacheTime(TimeSpan.FromDays(1));
+            data.Answer.SetCacheTime(TimeSpan.FromSeconds(1));
         }
     }
 }
