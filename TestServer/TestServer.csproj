@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8273009B-D53F-4142-A095-F1F32F5EA78A}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>TestServer</RootNamespace>
+    <AssemblyName>TestServer</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Cave.AssemblyVersionInfo, Version=1.0.2.0, Culture=neutral, PublicKeyToken=6d14267e89a7f972, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cave.AssemblyVersionInfo.1.0.2\lib\net45\Cave.AssemblyVersionInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="Cave.Auth, Version=1.0.2.0, Culture=neutral, PublicKeyToken=bdb622389f87bd41, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cave.Auth.1.0.2\lib\net46\Cave.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Cave.BaseX, Version=1.0.1.0, Culture=neutral, PublicKeyToken=7e61c8d25a3e5637, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cave.BaseX.1.0.1\lib\net46\Cave.BaseX.dll</HintPath>
+    </Reference>
+    <Reference Include="Cave.Collections, Version=1.0.2.0, Culture=neutral, PublicKeyToken=a388ee7965934a9d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cave.Collections.1.0.2\lib\net45\Cave.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Cave.Compression, Version=1.0.2.0, Culture=neutral, PublicKeyToken=81fb9a2cd82ecf81, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cave.Compression.1.0.2-ci-20190310-5\lib\net46\Cave.Compression.dll</HintPath>
+    </Reference>
+    <Reference Include="Cave.CRC, Version=1.0.2.0, Culture=neutral, PublicKeyToken=fa3f925e08d9ceff, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cave.CRC.1.0.2-ci-20190311-1\lib\net46\Cave.CRC.dll</HintPath>
+    </Reference>
+    <Reference Include="Cave.Data, Version=1.0.6.0, Culture=neutral, PublicKeyToken=6aaeb5549f3c40a5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cave.Data.1.0.6\lib\net46\Cave.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Cave.Extensions, Version=1.0.7.0, Culture=neutral, PublicKeyToken=65480c9a544d67e6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cave.Extensions.1.0.7\lib\net46\Cave.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Cave.FileSystem, Version=1.1.2.0, Culture=neutral, PublicKeyToken=f4adf870e9452545, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cave.FileSystem.1.1.2-ci-20190324-1\lib\net46\Cave.FileSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Cave.IO, Version=1.0.5.0, Culture=neutral, PublicKeyToken=9c6246ce3e4f0673, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cave.IO.1.0.5\lib\net45\Cave.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Cave.Mail, Version=1.0.1.0, Culture=neutral, PublicKeyToken=ddcef807c2dba350, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cave.Mail.1.0.1\lib\net46\Cave.Mail.dll</HintPath>
+    </Reference>
+    <Reference Include="Cave.Media, Version=1.0.5.0, Culture=neutral, PublicKeyToken=53edfbdc2021850f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cave.Media.1.0.5-ci-20190324-1\lib\net46\Cave.Media.dll</HintPath>
+    </Reference>
+    <Reference Include="Cave.Net, Version=1.0.8.0, Culture=neutral, PublicKeyToken=d530057a0be928c0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cave.Net.1.0.8-ci-20190321-4\lib\net46\Cave.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Cave.Platform, Version=1.0.1.0, Culture=neutral, PublicKeyToken=3cb6f3161bcbd059, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cave.Platform.1.0.1\lib\net46\Cave.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Cave.Settings, Version=1.0.4.0, Culture=neutral, PublicKeyToken=a710071e7811c999, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cave.Settings.1.0.4-ci-20190324-2\lib\net46\Cave.Settings.dll</HintPath>
+    </Reference>
+    <Reference Include="Cave.WebServer, Version=1.0.4.0, Culture=neutral, PublicKeyToken=5c5f84a0dbbd600b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cave.WebServer.1.0.4-ci-20190321-1\lib\net46\Cave.WebServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Cave.Media.dll.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cave.Avatar\Cave.Avatar.csproj">
+      <Project>{0ccd73fb-2e60-4308-aa60-a1109f9fccfc}</Project>
+      <Name>Cave.Avatar</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
