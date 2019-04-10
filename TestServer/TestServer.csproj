@@ -49,10 +49,10 @@
       <HintPath>..\packages\Cave.Compression.1.0.2-ci-20190310-5\lib\net46\Cave.Compression.dll</HintPath>
     </Reference>
     <Reference Include="Cave.CRC, Version=1.0.2.0, Culture=neutral, PublicKeyToken=fa3f925e08d9ceff, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cave.CRC.1.0.2-ci-20190311-1\lib\net46\Cave.CRC.dll</HintPath>
+      <HintPath>..\packages\Cave.CRC.1.0.2\lib\net46\Cave.CRC.dll</HintPath>
     </Reference>
-    <Reference Include="Cave.Data, Version=1.0.6.0, Culture=neutral, PublicKeyToken=6aaeb5549f3c40a5, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cave.Data.1.0.6\lib\net46\Cave.Data.dll</HintPath>
+    <Reference Include="Cave.Data, Version=1.0.7.0, Culture=neutral, PublicKeyToken=6aaeb5549f3c40a5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cave.Data.1.0.7-ci-20190330-1\lib\net46\Cave.Data.dll</HintPath>
     </Reference>
     <Reference Include="Cave.Extensions, Version=1.0.7.0, Culture=neutral, PublicKeyToken=65480c9a544d67e6, processorArchitecture=MSIL">
       <HintPath>..\packages\Cave.Extensions.1.0.7\lib\net46\Cave.Extensions.dll</HintPath>
@@ -66,11 +66,11 @@
     <Reference Include="Cave.Mail, Version=1.0.1.0, Culture=neutral, PublicKeyToken=ddcef807c2dba350, processorArchitecture=MSIL">
       <HintPath>..\packages\Cave.Mail.1.0.1\lib\net46\Cave.Mail.dll</HintPath>
     </Reference>
-    <Reference Include="Cave.Media, Version=1.0.5.0, Culture=neutral, PublicKeyToken=53edfbdc2021850f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cave.Media.1.0.5-ci-20190324-2\lib\net46\Cave.Media.dll</HintPath>
+    <Reference Include="Cave.Media, Version=1.0.6.0, Culture=neutral, PublicKeyToken=53edfbdc2021850f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cave.Media.1.0.6-ci-20190410-4\lib\net46\Cave.Media.dll</HintPath>
     </Reference>
     <Reference Include="Cave.Net, Version=1.0.8.0, Culture=neutral, PublicKeyToken=d530057a0be928c0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cave.Net.1.0.8-ci-20190321-4\lib\net46\Cave.Net.dll</HintPath>
+      <HintPath>..\packages\Cave.Net.1.0.8-ci-20190409-1\lib\net46\Cave.Net.dll</HintPath>
     </Reference>
     <Reference Include="Cave.Platform, Version=1.0.1.0, Culture=neutral, PublicKeyToken=3cb6f3161bcbd059, processorArchitecture=MSIL">
       <HintPath>..\packages\Cave.Platform.1.0.1\lib\net46\Cave.Platform.dll</HintPath>
