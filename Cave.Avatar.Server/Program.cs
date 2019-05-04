@@ -45,7 +45,7 @@ namespace Cave.Avatar.Server
             webServer.EnableExplain = true;
             webServer.Register(this);
             webServer.Register(avatarInterface);
-            webServer.Listen(8080);
+            webServer.Listen(webPort);
             exit.WaitOne();
             // Wait for shut down
             Thread.Sleep(500);

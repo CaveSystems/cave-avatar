@@ -8,7 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Cave.CRC" Version="1.0.2" />
     <PackageReference Include="Cave.Logging" Version="1.0.2" />
-    <PackageReference Include="Cave.Media" Version="1.0.5" />
+    <PackageReference Include="Cave.Media" Version="1.0.6" />
     <PackageReference Include="Cave.WebServer" Version="1.0.3" />
   </ItemGroup>
 

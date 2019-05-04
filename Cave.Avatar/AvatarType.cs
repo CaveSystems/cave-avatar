@@ -28,26 +28,21 @@ namespace Cave.Media.Video
         /// <summary>
         /// a geometric pattern based on an email hash
         /// </summary>
-        identicon,
+        IdentIcon,
 
         /// <summary>
         /// a generated 'monster' with different colors, faces, etc
         /// </summary>
-        monsterid,
+        MonsterId,
 
         /// <summary>
         /// generated faces with differing features and backgrounds
         /// </summary>
-        wavatar,
+        Wavatar,
 
         /// <summary>
         /// awesome generated, 8-bit arcade-style pixelated faces
         /// </summary>
-        retro,
-
-        /// <summary>
-        /// Do not use this
-        /// </summary>
-        _Count,
+        Retro,
     }
 }

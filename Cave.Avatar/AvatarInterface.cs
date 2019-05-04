@@ -41,6 +41,7 @@ namespace Cave.Web.Avatar
         IList<Item> mouths;
 
         /// <summary>Initializes a new instance of the <see cref="AvatarInterface"/> class.</summary>
+        /// <param name="imagePath">Path to the images.</param>
         public AvatarInterface(string imagePath)
         {
             noses = LoadImages(FileSystem.Combine(imagePath, "noses"));
@@ -61,7 +62,7 @@ namespace Cave.Web.Avatar
             foreach (string file in Directory.GetFiles(path, "*.png"))
             {
                 Trace.TraceInformation("Load {0}", file);
-                Bitmap32 bitmap = Bitmap32.FromFile(file);
+                var bitmap = Bitmap32.FromFile(file);
                 results.Add(new Item() { FileName = file, Bitmap = bitmap });
             }
             return results;
@@ -219,20 +220,20 @@ namespace Cave.Web.Avatar
 
         void Draw(WebData data, int color, int nose, int eyes, int mouth, int face, int rotate)
         {
-            using (MemoryStream stream = new MemoryStream())
-            using (Bitmap32 bmp = new Bitmap32(AvatarSize, AvatarSize))
+            using (var stream = new MemoryStream())
+            using (var bmp = new Bitmap32(AvatarSize, AvatarSize))
             {
-                ARGB faceColor = ARGB.FromHSI(color / 256.0f, 1, 1);
+                var faceColor = ARGB.FromHSI(color / 256.0f, 1, 1);
                 DrawFace(face, faceColor, faces, bmp);
                 DrawEyes(eyes, this.eyes, bmp);
                 DrawMouth(mouth, mouths, bmp);
                 DrawNose(nose, noses, bmp);
-                using (Bitmap32 result = new Bitmap32(AvatarSize, AvatarSize))
+                using (var result = new Bitmap32(AvatarSize, AvatarSize))
                 {
                     result.Draw(bmp, 0, 0, new Translation() { Rotation = ((rotate % 16) - 7) * 0.02f });
                     result.Save(stream);
                 }
-                WebMessage msg = WebMessage.Create(data.Method, "Avatar created");
+                var msg = WebMessage.Create(data.Method, "Avatar created");
                 data.Answer = WebAnswer.Raw(data.Request, msg, stream.GetBuffer(), "image/png");
                 data.Answer.AllowCompression = false;
                 data.Answer.SetCacheTime(TimeSpan.FromDays(1));
@@ -300,7 +301,7 @@ namespace Cave.Web.Avatar
                 }
                 else
                 {
-                    CRC32 crc = (CRC32)crc32.Clone();
+                    var crc = (CRC32)crc32.Clone();
                     crc.Update(Encoding.UTF8.GetBytes(text));
                     id = crc.Value;
                 }
@@ -367,7 +368,7 @@ namespace Cave.Web.Avatar
 
             long id = (color.Value & 0xFF) | (nose.Value & 0x1F) << 8 | (eyes.Value & 0x1F) << 13 | (mouth.Value & 0x1F) << 18 | (face.Value & 0x1F) << 23 | (rotate.Value & 0x0F) << 28;
 
-            HtmlPageBuilder html = new HtmlPageBuilder(data.Request);
+            var html = new HtmlPageBuilder(data.Request);
 
             html.Breadcrump.Add(new WebLink() { Link = "/avatar/get?id=" + id, Text = "Avatar " + id });
             html.Content.CardOpen(Bootstrap4.GetLink("Avatar ID " + id, "/Avatar?id=" + id));
@@ -396,7 +397,7 @@ namespace Cave.Web.Avatar
             html.Content.ListGroupClose();
             html.Content.CardClose();
 
-            WebMessage msg = WebMessage.Create(data.Method, "Created avatar.");
+            var msg = WebMessage.Create(data.Method, "Created avatar.");
             data.Answer = html.ToAnswer(msg);
             data.Answer.SetCacheTime(TimeSpan.FromDays(1));
         }
