@@ -7,7 +7,7 @@
         <AssemblyOriginatorKeyFile>Cave.Avatar.snk</AssemblyOriginatorKeyFile>
         <Product>CaveSystems Avatar Library</Product>
         <PackageTags>CaveSystems Avatar</PackageTags>
-        <Description>CaveSystems Avatar Library. </Description>
+        <Description>CaveSystems Avatar Library. Supports DiceBear, Gravatar, Libravatar and Robohash Avatars.</Description>
         <PackageProjectUrl>https://github.com/CaveSystems/cave-avatar</PackageProjectUrl>
         <RepositoryUrl>https://github.com/CaveSystems/cave-avatar</RepositoryUrl>
         <!--settings-->
