@@ -2,9 +2,10 @@
 
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;netstandard2.1;net20;net35;net40;net45;net50;net60</TargetFrameworks>
+        <TargetPlatformIdentifier>windows</TargetPlatformIdentifier>
         <!--project-->
         <RootNamespace>Cave.Media</RootNamespace>
-        <AssemblyOriginatorKeyFile>Cave.Avatar.snk</AssemblyOriginatorKeyFile>
+        <AssemblyOriginatorKeyFile>Cave.Avatar.Gdi.snk</AssemblyOriginatorKeyFile>
         <Product>CaveSystems Avatar Library</Product>
         <PackageTags>CaveSystems Avatar</PackageTags>
         <Description>CaveSystems Avatar Library. </Description>
@@ -21,5 +22,6 @@
 	<ItemGroup>
 		<PackageReference Include="Cave.Extensions" Version="2.1.13" />
 		<PackageReference Include="Cave.Media" Version="2.0.1" />
+		<PackageReference Include="Cave.Media.Gdi" Version="2.0.1" />
 	</ItemGroup>
 </Project>
