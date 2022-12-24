@@ -3,13 +3,12 @@ using System.Text;
 
 namespace Cave.Media
 {
-
-
     /// <summary>Provides a class for generating avatars</summary>
     public class Avatar
     {
         IBitmap32 bitmap;
-        readonly AvatarFunction function;
+        readonly AvatarBitmapFunction bitmapFunction;
+        readonly AvatarUrlFunction? urlFunction;
 
         /// <summary>
         /// Provides access to to settings for the avatar
@@ -20,11 +19,12 @@ namespace Cave.Media
         /// Initializes a new instance of the <see cref="Avatar"/> class.
         /// </summary>
         /// <param name="settings">Settings used to generate the avatar.</param>
-        /// <param name="function">Function to retrieve the bitmap for the current settings.</param>
-        public Avatar(AvatarSettings settings, AvatarFunction function)
+        /// <param name="bitmapFunction">Function to retrieve the bitmap for the current settings.</param>
+        public Avatar(AvatarSettings settings, AvatarBitmapFunction bitmapFunction, AvatarUrlFunction urlFunction)
         {
             Settings = settings;
-            this.function = function;
+            this.bitmapFunction = bitmapFunction;
+            this.urlFunction = urlFunction;
             settings.Changed += (v) => Invalidate();
         }
 
@@ -68,6 +68,10 @@ namespace Cave.Media
                 {
                     if (setting is AvatarName || setting is AvatarSize) continue;
                 }
+                if (setting.GetType().IsEnum)
+                {
+                    continue;
+                }
                 if (first)
                 {
                     sb.Append('?');
@@ -83,6 +87,11 @@ namespace Cave.Media
         }
 
         /// <summary>
+        /// Gets the avatar url.
+        /// </summary>
+        public ConnectionString? Url => urlFunction?.Invoke(Settings);
+
+        /// <summary>
         /// Gets the bitmap.
         /// </summary>
         public IBitmap32 Bitmap
@@ -91,7 +100,7 @@ namespace Cave.Media
             {
                 if (bitmap == null)
                 {
-                    bitmap = function(Settings);
+                    bitmap = bitmapFunction(Settings);
                 }
                 return bitmap;
             }

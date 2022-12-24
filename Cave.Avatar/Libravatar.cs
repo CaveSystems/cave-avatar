@@ -16,10 +16,10 @@ public static class Libravatar
     {
         var settings = new AvatarSettings(name, size);
         settings.Set(type);
-        return new Avatar(settings, Get);
+        return new Avatar(settings, Get, GetUrl);
     }
 
-    static IBitmap32 Get(AvatarSettings settings)
+    static ConnectionString GetUrl(AvatarSettings settings)
     {
         var text = settings.Name;
         var rectSize = settings.Size;
@@ -27,8 +27,15 @@ public static class Libravatar
         var hash = StringExtensions.ToHexString(Hash.FromString(Hash.Type.MD5, text));
         var url = "https://seccdn.libravatar.org/avatar/" + hash + "?d=" + type.ToString().ToLower() + "&s=" + rectSize;
         url = Avatar.AddUrlSettings(url, settings, true, true);
+        return url;
+    }
+
+    static IBitmap32 Get(AvatarSettings settings)
+    {
+        var url = GetUrl(settings);
         var data = HttpConnection.Get(url);
         var result = Bitmap32.Create(data);
+        var type = settings.Get<LibravatarType>();
         switch (type)
         {
             case LibravatarType.IdentIcon: result.MakeTransparent(0xffffff); break;

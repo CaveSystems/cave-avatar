@@ -17,10 +17,10 @@ public static class Gravatar
     {
         var settings = new AvatarSettings(name, size);
         settings.Set(type);
-        return new Avatar(settings, Get);
+        return new Avatar(settings, Get, GetUrl);
     }
-    
-    static IBitmap32 Get(AvatarSettings settings)
+
+    static ConnectionString GetUrl(AvatarSettings settings)
     {
         var text = settings.Name;
         var rectSize = settings.Size;
@@ -28,6 +28,13 @@ public static class Gravatar
         var hash = StringExtensions.ToHexString(Hash.FromString(Hash.Type.MD5, text));
         var url = "http://www.gravatar.com/avatar/" + hash + "?d=" + type.ToString().ToLower() + "&s=" + rectSize;
         url = Avatar.AddUrlSettings(url, settings, true, true);
+        return url;
+    }
+
+    static IBitmap32 Get(AvatarSettings settings)
+    {
+        var type = settings.Get<GravatarType>();
+        var url = GetUrl(settings);
         var data = HttpConnection.Get(url);
         var result = Bitmap32.Create(data);
         switch (type)

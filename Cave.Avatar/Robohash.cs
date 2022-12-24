@@ -18,10 +18,10 @@ public static class Robohash
     {
         var settings = new AvatarSettings(name, size);
         settings.Set(type);
-        return new Avatar(settings, Get);
+        return new Avatar(settings, Get, GetUrl);
     }
 
-    static IBitmap32 Get(AvatarSettings settings)
+    static ConnectionString GetUrl(AvatarSettings settings)
     {
         var type = (int)settings.Get<RobohashType>();
         var hash = StringExtensions.ToHexString(Hash.FromString(Hash.Type.MD5, settings.Name));
@@ -30,6 +30,12 @@ public static class Robohash
             .Replace("{size}", settings.Size.ToString())
             .Replace("{hash}", hash);
         url = Avatar.AddUrlSettings(url, settings, true, false);
+        return url;
+    }
+
+    static IBitmap32 Get(AvatarSettings settings)
+    {
+        var url = GetUrl(settings);
         var data = HttpConnection.Get(url);
         return Bitmap32.Create(data);
     }

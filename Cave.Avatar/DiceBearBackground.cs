@@ -11,5 +11,5 @@ public struct DiceBearBackground
     public ARGB Color;
 
     /// <inheritdoc/>
-    public override string ToString() => $"b=%23{Color.ToHtmlColor().Substring(1)}";
+    public override string ToString() => Color.Alpha == 0 ? "style=transparent" : $"b=%23{(Color.AsUInt32 & 0xFFFFFFu):X6}";
 }
